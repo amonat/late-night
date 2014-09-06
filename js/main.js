@@ -1,10 +1,11 @@
 // Globals
 var activeControlProperty = 'starts1413';
 var controlProperties = [
-  {value:0.75, color:'255,0,0'},
-  {value:0.9, color:'255,128,0'},
+  {value:0.8, color:'255,0,0'},
+  {value:0.9, color:'255,100,0'},
+  {value:1, color:'255,190,0'},
   {value:1.1, color:'0,175,0'},
-  {value:1.25, color:'0,128,255'},
+  {value:1.2, color:'0,128,255'},
   {value:100, color:'0,0,255'}
 ]
 
