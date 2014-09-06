@@ -4,17 +4,48 @@
   <title>Late Night Hackathon</title>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <link rel='stylesheet' type='text/css' href='css/main.css' media='screen' />
+  <link rel='stylesheet' type='text/css' href='css/bootstrap.min.css'>
+  <link rel='stylesheet' type='text/css' href='css/bootstrap-theme.min.css'>
+
 </head>
 
 <body>
+
+  <div id='segment-detail'>
+    <p>
+      <strong>Starts</strong>
+      <br/>Total: <span id="detail-start-tot"></span>
+      <br/>% Change from 2013: <span id="detail-start-percent"></span>
+    </p>
+
+    <p>
+      <strong>End</strong>
+      <br/>Total: <span id="detail-end-tot"></span>
+      <br/>% Change from 2013: <span id="detail-end-percent"></span>
+    </p>
+  </div>
+
+  <div class="btn-group">
+    <button class="map-control-comparison" id="start_tot" class="btn">Taxi Starts</button>
+    <button class="map-control-comparison" id="Ends_tot" class="btn">Ends Total</button>
+  </div>
+  <div class="btn-group">
+    <button class="map-control-total" id="starts1413" class="btn">Starts 14/13</button>
+    <button class="map-control-total" id="ends1413" class="btn">Ends 14/13</button>
+  </div>
+
   <div class="hundred-height">
     <div id="map-canvas">
     </div>
   </div>
+
+
+
 </body>
 </html>
 
 <!-- Libraries -->
 <script type='text/javascript' src='js/jquery-1.11.1.min.js'></script>
 <script type='text/javascript' src='js/d3.v3.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/bootstrap.min.js'></script>
 <script type='text/javascript' src='js/main.js'></script>

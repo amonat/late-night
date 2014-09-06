@@ -1,3 +1,35 @@
+// Globals
+var activeControlProperty = 'starts1413';
+var controlProperties = [
+  {value:0.75, color:'255,0,0'},
+  {value:0.9, color:'255,128,0'},
+  {value:1.1, color:'0,175,0'},
+  {value:1.25, color:'0,128,255'},
+  {value:100, color:'0,0,255'}
+]
+
+var activeComparisonProperty = 'start_tot';
+var comparisonProperties = [
+  {value:100, opacity:'0.5'},
+  {value:1000, opacity:'0.6'},
+  {value:10000, opacity:'0.7'},
+  {value:20000, opacity:'0.8'},
+  {value:30000, opacity:'0.9'},
+  {value:50000, opacity:'0.95'},
+  {value:1000000, opacity:'1'}
+  ]
+$('.map-control-total').on('click', function() {
+  activeControlProperty = $(this).attr('id');
+  d3.selectAll('.segment').attr('style', setZipColor)
+})
+$('.map-control-comparison').on('click', function() {
+  activeComparisonProperty = $(this).attr('id');
+  d3.selectAll('.segment').attr('style', setZipColor)
+})
+
+var zipFeatures;
+
+// Renderers
 function renderRoads(zips) {
   mapElement = $("#map-canvas");
 
@@ -24,16 +56,20 @@ function renderRoads(zips) {
   var zipFeature = svg.append("g");
 
 
-  var zipFeatures = zipFeature.selectAll("path")
+  zipFeatures = zipFeature.selectAll("path")
     .data(zips.features)
     .enter().append("path")
     .attr("d", d3.geo.path().projection(projection))
     .attr('class','segment')
+    .attr('style', setZipColor)
     .on('click',function(d, i) {
-      console.log(d);
+
     })
     .on('mouseover', function(d, i) {
-      console.log(d);
+      $('#detail-start-tot').html(d.properties.start_tot);
+      $('#detail-start-percent').html(d.properties.starts1413);
+      $('#detail-end-tot').html(d.properties.Ends_tot);
+      $('#detail-end-percent').html(d.properties.ends1413);
     })
   svg.call(zoom);
 
@@ -45,6 +81,35 @@ function renderRoads(zips) {
 
 };
 
+// Helpers
+function setZipColor(d, i) {
+  var value;
+
+  // Set opacity
+  var control = d.properties[activeControlProperty]
+  for (var i=0; i<controlProperties.length; i++) {
+    var controlProperty = controlProperties[i];
+    if (controlProperty.value > control) {
+      var color = controlProperty.color
+      break;
+    }
+  }
+
+  // Set color
+  var comparison = d.properties[activeComparisonProperty]
+  for (var i=0; i<comparisonProperties.length; i++) {
+    var comparisonProperty = comparisonProperties[i]
+    if (comparisonProperty.value > comparison) {
+      var opacity = comparisonProperty.opacity;
+      break;
+    }
+  }
+
+  return('fill: rgba('+color+','+opacity+')')
+
+}
+
+// Data
 $.getJSON("data/clip8.json").then( function (zipsResults) {
   renderRoads(zipsResults);
 });

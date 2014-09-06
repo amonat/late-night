@@ -8,6 +8,11 @@ body {
   font-family: Tahoma;
 }
 
+.segment-detail {
+  position: relative;
+  float: right;
+}
+
 .hundred-height {
   height: 100%;
 }
