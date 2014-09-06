@@ -11,10 +11,17 @@ var controlProperties = [
 
 var activeComparisonProperty = 'start_tot';
 var comparisonProperties = [
-  {value:100, opacity:'0.5'},
-  {value:1000, opacity:'0.6'},
-  {value:10000, opacity:'0.7'},
-  {value:20000, opacity:'0.8'},
+  {value:50, opacity:'0.2'},
+  {value:100, opacity:'0.25'},
+  {value:250, opacity:'0.3'},
+  {value:500, opacity:'0.35'},
+  {value:1000, opacity:'0.4'},
+  {value:2500, opacity:'0.45'},
+  {value:5000, opacity:'0.5'},
+  {value:10000, opacity:'0.55'},
+  {value:15000, opacity:'0.6'},
+  {value:20000, opacity:'0.65'},
+  {value:25000, opacity:'0.7'},
   {value:30000, opacity:'0.9'},
   {value:50000, opacity:'0.95'},
   {value:1000000, opacity:'1'}
