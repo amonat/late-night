@@ -54,6 +54,12 @@ body {
   fill: none;
 }
 
+.subway {
+  stroke: rgb(100,100,100);
+  stroke-width: 2.0;
+  fill: none;
+}
+
 .segment:hover {
   stroke: rgb(0,0,0);
   stroke-width: 1.0;

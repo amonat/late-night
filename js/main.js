@@ -44,7 +44,7 @@ $('.map-control-comparison').on('click', function() {
 var zipFeatures;
 
 // Renderers
-function renderRoads(zips) {
+function renderRoads(zips, mbtaWgs) {
   mapElement = $("#map-canvas");
 
   var width = mapElement.width(),
@@ -68,7 +68,6 @@ function renderRoads(zips) {
     .on("zoom", zoomed);
 
   var zipFeature = svg.append("g");
-
 
   zipFeatures = zipFeature.selectAll("path")
     .data(zips.features)
@@ -95,12 +94,25 @@ function renderRoads(zips) {
         $('#detail-city').html(geocodedInformation.city);
       });
     })
+
+    var subwayFeature = svg.append("g");
+
+    subwayFeature.selectAll("path")
+      .data(mbtaWgs.features)
+      .enter().append("path")
+      .attr("d", d3.geo.path().projection(projection))
+      .attr('class','subway')
+
   svg.call(zoom);
 
   function zoomed() {
-    zipFeature.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-    var strokeWidth = zipFeature.style("stroke-width");
-    zipFeature.style("stroke-width", strokeWidth / zoom.scale());
+    var features = [zipFeature, subwayFeature];
+    for (var i=0; i<features.length; i++) {
+      var feature = features[i];
+      feature.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+      var strokeWidth = feature.style("stroke-width");
+      feature.style("stroke-width", strokeWidth / zoom.scale());
+    }
   }
 
 };
@@ -128,12 +140,16 @@ function setZipColor(d, i) {
       break;
     }
   }
-
   return('fill: rgba('+color+','+opacity+')')
 
 }
 
 // Data
-$.getJSON("data/clip8.json").then( function (zipsResults) {
-  renderRoads(zipsResults);
+$.when(
+  $.getJSON("data/clip8.json"),
+  $.getJSON("data/mbta_wgs.json")
+).then( function (clip8, mbta_wgs) {
+  var zipsResults = clip8[0];
+  var mbtaWgs = mbta_wgs[0];
+  renderRoads(zipsResults, mbtaWgs);
 });
