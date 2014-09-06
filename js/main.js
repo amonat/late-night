@@ -50,7 +50,7 @@ function renderRoads(zips) {
 
   var projection = d3.geo.mercator()
     .rotate([0, 0])
-    .center([-70.95, 42.05])
+    .center([-70.95, 42.22])
     .scale(20000)
     .translate([width / 2, height / 2]);
 
@@ -74,10 +74,18 @@ function renderRoads(zips) {
 
     })
     .on('mouseover', function(d, i) {
+      $('#segment-detail').show();
+      zipCode = d.properties.ZCTA5CE10;
+      startsPercentChange = Math.round((d.properties.starts1413-1)*100,0);
+      endsPercentChange = Math.round((d.properties.ends1413-1)*100,0);
+      $('#detail-zip').html(zipCode);
       $('#detail-start-tot').html(d.properties.start_tot);
-      $('#detail-start-percent').html(d.properties.starts1413);
+      $('#detail-start-percent').html(startsPercentChange);
       $('#detail-end-tot').html(d.properties.Ends_tot);
-      $('#detail-end-percent').html(d.properties.ends1413);
+      $('#detail-end-percent').html(endsPercentChange);
+      $.getJSON('http://ziptasticapi.com/'+zipCode+'?callback=').then( function (geocodedInformation) {
+        $('#detail-city').html(geocodedInformation.city);
+      });
     })
   svg.call(zoom);
 

@@ -8,9 +8,17 @@ body {
   font-family: Tahoma;
 }
 
-.segment-detail {
-  position: relative;
-  float: right;
+#segment-detail {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  width: 15em;
+}
+
+#controls {
+  position: fixed;
+  top: 1em;
+  left: 1em;
 }
 
 .hundred-height {

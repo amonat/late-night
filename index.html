@@ -3,38 +3,44 @@
 <head>
   <title>Late Night Hackathon</title>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-  <link rel='stylesheet' type='text/css' href='css/main.css' media='screen' />
   <link rel='stylesheet' type='text/css' href='css/bootstrap.min.css'>
   <link rel='stylesheet' type='text/css' href='css/bootstrap-theme.min.css'>
+  <link rel='stylesheet' type='text/css' href='css/main.css' media='screen' />
+
 
 </head>
 
 <body>
 
-  <div id='segment-detail'>
-    <p>
-      <strong>Starts</strong>
-      <br/>Total: <span id="detail-start-tot"></span>
-      <br/>% Change from 2013: <span id="detail-start-percent"></span>
-    </p>
-
-    <p>
-      <strong>End</strong>
-      <br/>Total: <span id="detail-end-tot"></span>
-      <br/>% Change from 2013: <span id="detail-end-percent"></span>
-    </p>
-  </div>
-
-  <div class="btn-group">
-    <button class="map-control-comparison" id="start_tot" class="btn">Taxi Starts</button>
-    <button class="map-control-comparison" id="Ends_tot" class="btn">Ends Total</button>
-  </div>
-  <div class="btn-group">
-    <button class="map-control-total" id="starts1413" class="btn">Starts 14/13</button>
-    <button class="map-control-total" id="ends1413" class="btn">Ends 14/13</button>
-  </div>
-
   <div class="hundred-height">
+
+    <div id='segment-detail' style="display: none;">
+      <p><strong><span id='detail-zip'></span>, <span id='detail-city'></span></strong></p>
+      <p>
+        <strong>Starts</strong>
+        <br/>Total: <span id="detail-start-tot"></span>
+        <br/>Change from 2013: <span id="detail-start-percent"></span>%
+      </p>
+
+      <p>
+        <strong>End</strong>
+        <br/>Total: <span id="detail-end-tot"></span>
+        <br/>Change from 2013: <span id="detail-end-percent"></span>%
+      </p>
+    </div>
+
+    <div id="controls">
+      <div class="btn-group">
+        <button class="map-control-comparison active btn btn-default" id="start_tot">Taxi Starts</button>
+        <button class="map-control-comparison btn btn-default" id="Ends_tot">Ends Total</button>
+      </div>
+      <div class="btn-group">
+        <button class="map-control-total btn btn-default" id="starts1413">Starts 14/13</button>
+        <button class="map-control-total btn btn-default" id="ends1413">Ends 14/13</button>
+      </div>
+    </div>
+
+
     <div id="map-canvas">
     </div>
   </div>
