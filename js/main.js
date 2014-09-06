@@ -42,6 +42,7 @@ $('.map-control-comparison').on('click', function() {
 })
 
 var zipFeatures;
+var zipCityNames = {};
 
 // Renderers
 function renderRoads(zips, mbtaWgs) {
@@ -80,7 +81,7 @@ function renderRoads(zips, mbtaWgs) {
     })
     .on('mouseover', function(d, i) {
       $('#segment-detail').show();
-      zipCode = d.properties.ZCTA5CE10;
+      var zipCode = d.properties.ZCTA5CE10;
       startsPercentChange = Math.round((d.properties.starts1413-1)*100,0);
       endsPercentChange = Math.round((d.properties.ends1413-1)*100,0);
       $('#detail-zip').html(zipCode);
@@ -90,9 +91,16 @@ function renderRoads(zips, mbtaWgs) {
       $('#detail-end-percent').html(endsPercentChange);
 
       $('#detail-city').html('');
-      $.getJSON('http://ziptasticapi.com/'+zipCode+'?callback=').then( function (geocodedInformation) {
-        $('#detail-city').html(geocodedInformation.city);
-      });
+      if (zipCityNames[zipCode]) {
+        $('#detail-city').html(zipCityNames[zipCode]);
+      } else {
+        $.getJSON('http://ziptasticapi.com/'+zipCode+'?callback=').then( function (geocodedInformation) {
+          zipCityNames[zipCode] = geocodedInformation.city;
+          if (zipCode == $("#detail-zip").text()) {
+            $('#detail-city').html(geocodedInformation.city);
+          }
+        });
+      }
     })
 
     var subwayFeature = svg.append("g");
