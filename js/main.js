@@ -28,10 +28,16 @@ var comparisonProperties = [
   ]
 $('.map-control-total').on('click', function() {
   activeControlProperty = $(this).attr('id');
+  $('#ends1413').removeClass('active');
+  $('#starts1413').removeClass('active');
+  $(this).addClass('active');
   d3.selectAll('.segment').attr('style', setZipColor)
 })
 $('.map-control-comparison').on('click', function() {
   activeComparisonProperty = $(this).attr('id');
+  $('#Ends_tot').removeClass('active');
+  $('#start_tot').removeClass('active');
+  $(this).addClass('active');
   d3.selectAll('.segment').attr('style', setZipColor)
 })
 
@@ -50,7 +56,7 @@ function renderRoads(zips) {
 
   var projection = d3.geo.mercator()
     .rotate([0, 0])
-    .center([-70.95, 42.22])
+    .center([-70.95, 42.27])
     .scale(20000)
     .translate([width / 2, height / 2]);
 
@@ -83,6 +89,8 @@ function renderRoads(zips) {
       $('#detail-start-percent').html(startsPercentChange);
       $('#detail-end-tot').html(d.properties.Ends_tot);
       $('#detail-end-percent').html(endsPercentChange);
+
+      $('#detail-city').html('');
       $.getJSON('http://ziptasticapi.com/'+zipCode+'?callback=').then( function (geocodedInformation) {
         $('#detail-city').html(geocodedInformation.city);
       });
